@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form1</title>
+    <style>
+      body {
+        background-color: black;
+        color:white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>formulario #1</h1>
+    <form action="./recibeDatoForm1.php" method="post">
+      <input type="text" 
+      name="name" placeholder="escribe tu nombre" />
+      <br />
+      <label for="genero">hombre</label>
+      <input type="radio" 
+      name="genero" value="masculino" id="genero" />
+      <br />
+      <label for="genero-f">mujer</label>
+      <input type="radio" 
+      name="genero" value="femenido" id="genero-f" />
+      <br />
+      <br />
+
+      <select title="paises" name="paises" id="paises">
+        <option value="bolivia">bolivia</option>
+        <option value="argentina">argentina</option>
+        <option value="peru">peru</option>
+        <option value="colombia">colombia</option>
+      </select>
+      <br />
+      <label for="terminos">aceptar terminos</label>
+      <input type="checkbox" name="terminos" value="" id="terminos" />
+      <br />
+      <input type="submit" value="enviar" />
+    </form>
+  </body>
+</html>

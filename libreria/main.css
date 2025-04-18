@@ -1,0 +1,22 @@
+/* reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+  background: rebeccapurple;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+body {
+  display: flex;
+  flex-flow: column wrap;
+  place-content: center;
+}
