@@ -4,7 +4,7 @@
  * ⚙️ Clase padre para la gestión de la conexión a la base de datos MySQLi (Consola).
  * Proporciona una conexión protegida y registra eventos en la consola.
  */
-class Connection {
+class Connection extends mysqli{
     /**
      * @var ?mysqli La instancia de la conexión a la base de datos. Null si no se ha establecido la conexión.
      */
@@ -38,7 +38,7 @@ class Connection {
     /**
      * @var int El puerto del servidor de la base de datos MySQL.
      */
-    private int $port = 3307;
+    private int $port = 3308;
 
 
     /**
@@ -112,7 +112,7 @@ class Connection {
      */
     protected function disconnect(): void {
         if ($this->connection instanceof mysqli) {
-            if ($this->connection->ping()) {
+            if ($mysqli->connect_errno) {
                 $this->connection->close();
                 echo "[i] Conexión a la base de datos cerrada.\n";
             } else {

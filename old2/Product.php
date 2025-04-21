@@ -130,85 +130,85 @@ $product->getAll(); // Llamamos a getAll para ver la lista de productos después
 // -- INSERT INTO products (name, description, created_at) VALUES ('power', 'bost x100', NOW());
 // -- SELECT * FROM products;
 
-—--------
+// —--------
 
-<?php
-//file: User.php
-include 'Connection.php';
-
-
-class User extends Connection{
-    // Definimos los atributos del Usuario
-    public $id;
-    public $name;
-    public $age;
-    public $email;
-    public $password;
-    public $created_at;
-    public $updated_at;
+// <?php
+// //file: User.php
+// include 'Connection.php';
 
 
-    // Registro de un nuevo usuario
-    public function create(){
-        $this->connect();
-        $stmt = mysqli_prepare(
-            $this->connection,
-            "INSERT INTO users (name, age, email, password) VALUES (?, ?, ?, ?)"
-        );
-        $stmt->bind_param("siss", $this->name, $this->age, $this->email, $this->password);
-        $stmt->execute();
-        $stmt->close();
-    }
+// class User extends Connection{
+//     // Definimos los atributos del Usuario
+//     public $id;
+//     public $name;
+//     public $age;
+//     public $email;
+//     public $password;
+//     public $created_at;
+//     public $updated_at;
 
 
-    // Obtener todos los usuarios
-    public function getAll(){
-        $this->connect();
-        $stmt = mysqli_prepare($this->connection, "SELECT * FROM users");
-        $stmt->execute();
-        $result = $stmt->get_result();
-        // Lista de usuarios
-        $users = array();
+//     // Registro de un nuevo usuario
+//     public function create(){
+//         $this->connect();
+//         $stmt = mysqli_prepare(
+//             $this->connection,
+//             "INSERT INTO users (name, age, email, password) VALUES (?, ?, ?, ?)"
+//         );
+//         $stmt->bind_param("siss", $this->name, $this->age, $this->email, $this->password);
+//         $stmt->execute();
+//         $stmt->close();
+//     }
 
 
-        // Recorremos el resultado y lo guardamos en un array
-        while ($row = $result->fetch_assoc()) {
-            array_push($users, $row);
-        }
-        return $users;
-    }
+//     // Obtener todos los usuarios
+//     public function getAll(){
+//         $this->connect();
+//         $stmt = mysqli_prepare($this->connection, "SELECT * FROM users");
+//         $stmt->execute();
+//         $result = $stmt->get_result();
+//         // Lista de usuarios
+//         $users = array();
 
 
-    // Obtener un usuario por su id
-    public function getFirst($id){
-        $this->connect();
-        $stmt = mysqli_prepare($this->connection, "SELECT * FROM users WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
-    }
+//         // Recorremos el resultado y lo guardamos en un array
+//         while ($row = $result->fetch_assoc()) {
+//             array_push($users, $row);
+//         }
+//         return $users;
+//     }
 
 
-    // Actualizar un usuario
-    public function update($id){
-        $this->connect();
-        $stmt = mysqli_prepare(
-            $this->connection,
-            "UPDATE users SET name = ?, age = ?, email = ?, password = ? WHERE id = ?"
-        );
-        $stmt->bind_param("sissi", $this->name, $this->age, $this->email, $this->password, $id);
-        $stmt->execute();
-        $stmt->close();
-    }
+//     // Obtener un usuario por su id
+//     public function getFirst($id){
+//         $this->connect();
+//         $stmt = mysqli_prepare($this->connection, "SELECT * FROM users WHERE id = ?");
+//         $stmt->bind_param("i", $id);
+//         $stmt->execute();
+//         $result = $stmt->get_result();
+//         return $result->fetch_assoc();
+//     }
 
 
-    // Eliminar un usuario
-    public function delete($id){
-        $this->connect();
-        $stmt = mysqli_prepare($this->connection, "DELETE FROM users WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $stmt->close();
-    }    
-}
+//     // Actualizar un usuario
+//     public function update($id){
+//         $this->connect();
+//         $stmt = mysqli_prepare(
+//             $this->connection,
+//             "UPDATE users SET name = ?, age = ?, email = ?, password = ? WHERE id = ?"
+//         );
+//         $stmt->bind_param("sissi", $this->name, $this->age, $this->email, $this->password, $id);
+//         $stmt->execute();
+//         $stmt->close();
+//     }
+
+
+//     // Eliminar un usuario
+//     public function delete($id){
+//         $this->connect();
+//         $stmt = mysqli_prepare($this->connection, "DELETE FROM users WHERE id = ?");
+//         $stmt->bind_param("i", $id);
+//         $stmt->execute();
+//         $stmt->close();
+//     }    
+// }
