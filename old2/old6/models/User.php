@@ -15,6 +15,15 @@ class User {
         $this->conn = $database->connect();
     }
 
+    // Crear un usuario
+    public function create() {
+        $query = "INSERT INTO $this->table (username, email) VALUES (:username, :email)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':email', $this->email);
+        return $stmt->execute();
+    }
+
     // Obtener todos los usuarios
     public function getAll() {
         $query = "SELECT * FROM $this->table ORDER BY created_at DESC";

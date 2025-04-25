@@ -10,7 +10,7 @@
         <div class="error"><?php echo $_GET['error']; ?></div>
     <?php endif; ?>
     <form action="/posts/store" method="POST">
-        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>">
         <label>Título:</label><br>
         <input type="text" name="title" required><br>
         <label>Contenido:</label><br>

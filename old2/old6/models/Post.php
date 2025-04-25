@@ -8,9 +8,9 @@ class Post {
     public $id;
     public $title;
     public $content;
+    public $user_id;
     public $created_at;
     public $updated_at;
-    public $user_id;
 
     public function __construct() {
         $database = new Database();
@@ -27,19 +27,19 @@ class Post {
         return $stmt->execute();
     }
 
-    // Listar publicaciones por usuario
-    public function getByUser($user_id) {
-        $query = "SELECT * FROM $this->table WHERE user_id = :user_id ORDER BY created_at DESC";
+    // Obtener todas las publicaciones con el nombre del usuario
+    public function getAll() {
+        $query = "SELECT p.*, u.username FROM $this->table p LEFT JOIN users u ON p.user_id = u.id ORDER BY p.created_at DESC";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Listar todas las publicaciones
-    public function getAll() {
-        $query = "SELECT p.*, u.username FROM $this->table p JOIN users u ON p.user_id = u.id ORDER BY p.created_at DESC";
+    // Obtener publicaciones por usuario
+    public function getByUser($user_id) {
+        $query = "SELECT * FROM $this->table WHERE user_id = :user_id ORDER BY created_at DESC";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

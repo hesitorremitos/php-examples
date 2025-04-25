@@ -14,12 +14,15 @@ class PostController {
     // Mostrar todas las publicaciones
     public function index() {
         $posts = $this->post->getAll();
+        if (empty($posts)) {
+            $message = 'No hay publicaciones disponibles.';
+        }
         require_once __DIR__ . '/../views/posts/index.php';
     }
 
     // Mostrar formulario para crear publicación
     public function create($user_id) {
-        // Verificar que el usuario existe
+        // Validar que el usuario existe
         if (!$this->user->getById($user_id)) {
             header('Location: /?error=Usuario no encontrado');
             exit;
@@ -27,7 +30,7 @@ class PostController {
         require_once __DIR__ . '/../views/posts/create.php';
     }
 
-    // Guardar una nueva publicación
+    // Procesar creación de publicación
     public function store($data) {
         // Validaciones
         if (empty($data['title']) || empty($data['content'])) {
@@ -50,14 +53,17 @@ class PostController {
         }
     }
 
-    // Listar publicaciones de un usuario
+    // Mostrar publicaciones de un usuario
     public function show($user_id) {
-        // Verificar que el usuario existe
+        // Validar que el usuario existe
         if (!$this->user->getById($user_id)) {
             header('Location: /?error=Usuario no encontrado');
             exit;
         }
         $posts = $this->post->getByUser($user_id);
+        if (empty($posts)) {
+            $message = 'Este usuario no tiene publicaciones.';
+        }
         require_once __DIR__ . '/../views/posts/show.php';
     }
 }
