@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario Persona</title>
+</head>
+<body>
+    <form id="miFormulario">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div>
+            <label for="ci">Carnet de Identidad:</label>
+            <input type="text" id="ci" name="ci" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="fecha_nac">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha_nac" name="fecha_nac" required>
+        </div>
+        <button type="submit">Enviar Datos</button>
+    </form>
+
+    <div id="mensajeRespuesta"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formulario = document.getElementById('miFormulario');
+            const mensajeRespuestaDiv = document.getElementById('mensajeRespuesta');
+
+            formulario.addEventListener('submit', async (evento) => {
+                evento.preventDefault();
+
+                const formData = new FormData(formulario);
+                const datos = {};
+                formData.forEach((valor, clave) => {
+                    datos[clave] = valor;
+                });
+
+                try {
+                    const respuesta = await fetch('procesar_persona.php', { // Reemplaza con la ruta a tu script PHP
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(datos),
+                    });
+
+                    if (!respuesta.ok) {
+                        throw new Error(`Error en la petición HTTP: ${respuesta.status}`);
+                    }
+
+                    const resultado = await respuesta.text(); // Esperamos texto como respuesta del PHP (puede ser JSON si prefieres)
+                    mensajeRespuestaDiv.textContent = resultado;
+                    formulario.reset();
+                } catch (error) {
+                    console.error('Error al enviar los datos:', error);
+                    mensajeRespuestaDiv.textContent = 'Hubo un error al procesar los datos.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
