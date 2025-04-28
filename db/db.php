@@ -29,7 +29,7 @@ class Database {
         } catch (PDOException $e) {
             error_log("Error de conexión a la base de datos: " . $e->getMessage());
             echo "Error de conexion: ".$e->getMessage();
-            return null;
+            exit;
         }
     }
 
