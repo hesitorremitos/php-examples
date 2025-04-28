@@ -35,4 +35,3 @@ class Libros extends Database {
 }
 // Puedes agregar más métodos para interactuar con la tabla libros (crear, actualizar, eliminar, etc.)
 // siguiendo un patrón similar de manejo de excepciones.
-$libritos = new Libros();

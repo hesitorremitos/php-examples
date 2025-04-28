@@ -3,9 +3,9 @@
 
 class Database {
     private $host = 'localhost';
-    private $port = 3308;
+    private $port = 3306;
     private $dbname = 'librosdb';
-    private $username = 'root'; // Cambia esto según tu configuración
+    private $username = 'root1'; // Cambia esto según tu configuración
     private $password = ''; // Cambia esto según tu configuración
     private $conn;
 
@@ -14,7 +14,7 @@ class Database {
      * @return PDO|null La conexión PDO o null en caso de error.
      */
     public function getConnection() {
-        if ($this->conn !== null) {
+        if ($this->conn) {
             return $this->conn;
         }
 
@@ -28,6 +28,7 @@ class Database {
             return $this->conn;
         } catch (PDOException $e) {
             error_log("Error de conexión a la base de datos: " . $e->getMessage());
+            echo "Error de conexion: ".$e->getMessage();
             return null;
         }
     }
